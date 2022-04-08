@@ -1,0 +1,82 @@
+﻿<Window x:Class="Backup_Manager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Backup_Manager"
+        mc:Ignorable="d"
+        Closing="Window_Closing"
+        Title="Backup Manager" MinWidth="500" Height="350" Width="525">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <Grid Name="MenuGrid">
+            <Menu VerticalAlignment="Stretch">
+                <MenuItem Height="25" Header="File">
+                    <MenuItem Header="OpenDefaultDirectory" Command="{Binding OpenDefaultDirectoryCommand}"/>
+                    <MenuItem Header="Open Changelog" Command="{Binding OpenChangelogCommand}"/>
+                    <MenuItem Header="Exit" Command="{Binding ExitCommand}"/>
+                </MenuItem>
+                <MenuItem Header="About" Command="{Binding AboutWindowCommand}"/>
+            </Menu>
+        </Grid>
+        <Grid Name="ContentGrid" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition MinHeight="50" Height="*"/>
+                <RowDefinition Height="3"/>
+                <RowDefinition MinHeight="50" Height="*"/>
+            </Grid.RowDefinitions>            
+            <GridSplitter Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Grid Name="ButtonsGrid" Grid.Row="0">
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="1 2"/>
+                        <Setter Property="MinWidth" Value="50"/>
+                    </Style>
+                </Grid.Resources>
+                <Grid>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Run" Command="{Binding RunCommand}" IsEnabled="{Binding ItemIsSelected}"/>
+                        <Button Content="RunAll" Command="{Binding RunAllCommand}" IsEnabled="{Binding ListNotEmpty}" />
+                        <Button Content="Check" Command="{Binding CheckCommand}" IsEnabled="{Binding ItemIsSelected}"/>
+                        <Button Content="CheckAll" Command="{Binding CheckAllCommand}" IsEnabled="{Binding ListNotEmpty}"/>
+                        <Separator Width="2"/>
+                        <Button Content="Add" Command="{Binding AddCommand}" />
+                        <Button Content="Edit" Command="{Binding EditCommand}" IsEnabled="{Binding ItemIsSelected}"/>
+                        <Button Content="Clone" Command="{Binding CloneCommand}" IsEnabled="{Binding ItemIsSelected}"/>
+                        <Button Content="Delete" Command="{Binding DeleteCommand}" IsEnabled="{Binding ItemIsSelected}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Name="ItemListGrid" Grid.Row="1" Margin="2">
+                <Grid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="ToolTip" Value="{Binding Description,Mode=OneWay}"/>
+                    </Style>
+                </Grid.Resources>
+                <DataGrid  IsReadOnly="True" AutoGenerateColumns="False" SelectedItem="{Binding SelectedBackupItem,Mode=TwoWay}" ItemsSource="{Binding BackupData.BackupItems,Mode=TwoWay}">                    
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="Name"  Binding="{Binding Name,Mode=TwoWay}" />
+                        <DataGridTextColumn Width="100" Header="Last Backup"  Binding="{Binding LastBackup,Mode=TwoWay}" />
+                        <DataGridTextColumn Width="100" Header="Type" Binding="{Binding ItemType,Mode=TwoWay}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>            
+            <Grid Name="StatusListGrid" Grid.Row="3" Margin="2">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                    <TextBlock Margin="2" Text="{Binding StatusList}"/>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+        <Grid Name="StatusBarGrid" Grid.Row="2">
+            <ProgressBar Orientation="Horizontal"  Value="{Binding Progress,Mode=OneWay}" Margin="2"/>
+        </Grid>
+    </Grid>
+</Window>

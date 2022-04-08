@@ -1,0 +1,47 @@
+﻿<Window x:Class="Backup_Manager.AddEditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Backup_Manager"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="280" Width="600">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>       
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>    
+        </Grid.RowDefinitions>
+        <GridSplitter Grid.Column="1"/>        
+        <Label Grid.Row="0" Content="Name"/>
+        <TextBox Grid.Row="1" Text="{Binding SelectedItem.Name}"/>
+        <Label Grid.Row="2" Content="Data Path"/>
+        <TextBox Grid.Row="3" Text="{Binding SelectedItem.DataPath}"/>
+        <Label Grid.Row="4" Content="Backup Path"/>
+        <TextBox Grid.Row="5" Text="{Binding SelectedItem.BackupPath}"/>
+        <CheckBox Grid.Row="6" IsChecked="{Binding SelectedItem.Replace}" Content="Replace" VerticalAlignment="Center"/>
+        <ComboBox Grid.Row="7" ItemsSource="{Binding ItemTypes}" SelectedItem="{Binding ItemType}"/>
+        
+        <Label Grid.Column="2" Grid.Row="0" Content="Address"/>
+        <TextBox Grid.Column="2" Grid.Row="1" Text="{Binding SelectedItem.FTPConnectionData.Address}" IsEnabled="{Binding IsFtp}"/>
+        <Label Grid.Column="2" Grid.Row="2" Content="Username"/>
+        <TextBox Grid.Column="2" Grid.Row="3" Text="{Binding SelectedItem.FTPConnectionData.Username}" IsEnabled="{Binding IsFtp}"/>
+        <Label Grid.Column="2" Grid.Row="4" Content="Password"/>
+        <TextBox Grid.Column="2" Grid.Row="5" Text="{Binding SelectedItem.FTPConnectionData.Password}" IsEnabled="{Binding IsFtp}"/>
+        <Label Grid.Column="2" Grid.Row="6" Content="Port"/>
+        <TextBox Grid.Column="2" Grid.Row="7" Text="{Binding SelectedItem.FTPConnectionData.Port}" IsEnabled="{Binding IsFtp}"/>
+        <Button Grid.Column="0" Grid.Row="8" Content="Ok" Command="{Binding OkCommand}" Margin="2 5 2 0" VerticalContentAlignment="Center" Width="100"/>
+        <Button Grid.Column="2" Grid.Row="8" Content="Cancel" Command="{Binding CancelCommand}" Margin="2 5 2 0" VerticalContentAlignment="Center" Width="100"/>
+    </Grid>
+</Window>

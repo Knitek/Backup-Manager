@@ -1,0 +1,27 @@
+﻿Backup Manager Changelog
+20220408 v1.0.4
+- check function doesn't create missing folders
+- check counts the files to be updated
+- ftp backup showing file sizes in log
+
+20180913 v1.0.2
+Changes:
+- changed the default data path
+
+20180827 v1.0.1
+Changes:
+- fixed bug with override files where part of name equals source in all types of backup
+
+20180823 v1.0 
+Changes:
+- Run and check for:
+	- DiskType
+	- ToFtp
+	- FromFtp
+	- ZipToFtp
+- CheckAll
+- abut window
+- add/edit/delete item
+- save log to file
+- save items on program close
+- AddEdit window
